@@ -166,6 +166,8 @@ public protocol TrimmerViewDelegate: AnyObject {
         leftMaskView.backgroundColor = .white
         leftMaskView.alpha = 0.7
         leftMaskView.translatesAutoresizingMaskIntoConstraints = false
+        leftMaskView.layer.cornerRadius = 2.0
+        leftMaskView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMinXMaxYCorner]
         insertSubview(leftMaskView, belowSubview: leftHandleView)
 
         leftMaskView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -177,6 +179,8 @@ public protocol TrimmerViewDelegate: AnyObject {
         rightMaskView.backgroundColor = .white
         rightMaskView.alpha = 0.7
         rightMaskView.translatesAutoresizingMaskIntoConstraints = false
+        rightMaskView.layer.cornerRadius = 2.0
+        rightMaskView.layer.maskedCorners = [.layerMaxXMinYCorner, .layerMaxXMaxYCorner]
         insertSubview(rightMaskView, belowSubview: rightHandleView)
 
         rightMaskView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
