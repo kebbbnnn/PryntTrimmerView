@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "prynttrimmerview",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kebbbnnn/PryntTrimmerView.git",
+      "state" : {
+        "branch" : "master",
+        "revision" : "a43e82a140d0febed565d8d5f0d0675e49fbae00"
+      }
+    }
+  ],
+  "version" : 2
+}

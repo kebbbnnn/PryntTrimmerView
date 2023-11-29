@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2FF7E1DB2B14C14A005FFC87 /* PryntTrimmerView in Frameworks */ = {isa = PBXBuildFile; productRef = 2FF7E1DA2B14C14A005FFC87 /* PryntTrimmerView */; };
 		AB29084D24BE0D4500A55A86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB29084C24BE0D4500A55A86 /* AppDelegate.swift */; };
 		AB29085424BE0D4500A55A86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AB29085224BE0D4500A55A86 /* Main.storyboard */; };
 		AB29085624BE0D4500A55A86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AB29085524BE0D4500A55A86 /* Assets.xcassets */; };
@@ -56,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2FF7E1DB2B14C14A005FFC87 /* PryntTrimmerView in Frameworks */,
 				ABBCDAFF24BE109500A4BF18 /* PryntTrimmerView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -70,9 +72,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2FF7E1D52B14C0AE005FFC87 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		AB29084024BE0D4500A55A86 = {
 			isa = PBXGroup;
 			children = (
+				2FF7E1D52B14C0AE005FFC87 /* Packages */,
 				AB29084B24BE0D4500A55A86 /* PryntTrimmerViewExample */,
 				AB4C680C24BE248B00518B1A /* PryntTrimmerView */,
 				AB29084A24BE0D4500A55A86 /* Products */,
@@ -197,6 +207,7 @@
 			name = PryntTrimmerViewExample;
 			packageProductDependencies = (
 				ABBCDAFE24BE109500A4BF18 /* PryntTrimmerView */,
+				2FF7E1DA2B14C14A005FFC87 /* PryntTrimmerView */,
 			);
 			productName = PryntTrimmerViewExample;
 			productReference = AB29084924BE0D4500A55A86 /* PryntTrimmerViewExample.app */;
@@ -247,6 +258,9 @@
 				Base,
 			);
 			mainGroup = AB29084024BE0D4500A55A86;
+			packageReferences = (
+				2FF7E1D92B14C14A005FFC87 /* XCRemoteSwiftPackageReference "PryntTrimmerView" */,
+			);
 			productRefGroup = AB29084A24BE0D4500A55A86 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -568,7 +582,23 @@
 		};
 /* End XCConfigurationList section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		2FF7E1D92B14C14A005FFC87 /* XCRemoteSwiftPackageReference "PryntTrimmerView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kebbbnnn/PryntTrimmerView.git";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
+		2FF7E1DA2B14C14A005FFC87 /* PryntTrimmerView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2FF7E1D92B14C14A005FFC87 /* XCRemoteSwiftPackageReference "PryntTrimmerView" */;
+			productName = PryntTrimmerView;
+		};
 		ABBCDAFE24BE109500A4BF18 /* PryntTrimmerView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PryntTrimmerView;

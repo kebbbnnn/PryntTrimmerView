@@ -348,3 +348,33 @@ public protocol TrimmerViewDelegate: AnyObject {
         updateSelectedTime(stoppedMoving: false)
     }
 }
+
+extension TrimmerView {
+    public var duration: CMTime? {
+        return self.getTime(from: self.durationSize)
+    }
+    
+    public func grabVisibleFrames(_ block: @escaping ([UIImage]) -> Void) {
+        let startPosition = leftHandleView.frame.origin.x + assetPreview.contentOffset.x
+        let endPosition = rightHandleView.frame.origin.x + assetPreview.contentOffset.x - handleWidth
+        
+        self.assetPreview.grabVisibleFrames(
+            startPosition: startPosition,
+            endPosition: endPosition,
+            block: block
+        )
+    }
+    
+    public func resetMaxDuration(to duration: Double) {
+        guard let startTime = self.startTime else {
+            return
+        }
+        self.maxDuration = duration
+        self.regenerateThumbnails()
+        self.seek(to: startTime)
+        if let position = getPosition(from: startTime) {
+            self.assetPreview.contentOffset.x = position
+        }
+        self.updateSelectedTime(stoppedMoving: true)
+    }
+}
