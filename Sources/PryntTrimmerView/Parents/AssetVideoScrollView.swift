@@ -175,4 +175,13 @@ extension AssetVideoScrollView {
         }
         block(images)
     }
+    
+    public func visibleFrames(startPosition: CGFloat, endPosition: CGFloat, block: @escaping (UIImage) -> Void) {
+        for child in self.contentView.subviews where child.frame.origin.x >= startPosition && child.frame.origin.x <= endPosition {
+            guard let imageView = child as? UIImageView, let image = imageView.image else {
+                continue
+            }
+            block(image)
+        }
+    }
 }

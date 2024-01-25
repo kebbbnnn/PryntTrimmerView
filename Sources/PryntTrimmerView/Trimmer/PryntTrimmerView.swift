@@ -354,11 +354,44 @@ extension TrimmerView {
         return self.getTime(from: self.durationSize)
     }
     
-    public func grabVisibleFrames(_ block: @escaping ([UIImage]) -> Void) {
+    public func grabVisibleAssetFrames(_ block: @escaping ([UIImage]) -> Void) {
+        guard let asset else
+        {
+            return
+        }
+        
+        let generator = AVAssetImageGenerator(asset: asset)
+        generator.appliesPreferredTrackTransform = true // This handles the video's orientation
+
+        
         let startPosition = leftHandleView.frame.origin.x + assetPreview.contentOffset.x
         let endPosition = rightHandleView.frame.origin.x + assetPreview.contentOffset.x - handleWidth
         
-        self.assetPreview.grabVisibleFrames(
+        let startTime = CMTime(seconds: CMTimeGetSeconds(getTime(from: startPosition)!), preferredTimescale: 600)
+        let duration = CMTime(seconds: CMTimeGetSeconds(getTime(from: endPosition)!) - CMTimeGetSeconds(getTime(from: startPosition)!), preferredTimescale: 600)
+        
+        var currentTime = startTime
+        let interval = CMTime(seconds: 1, preferredTimescale: 600) // Adjust the interval as needed
+        var frames: [UIImage] = []
+
+        while currentTime < (startTime + duration) {
+            do {
+                let cgImage = try generator.copyCGImage(at: currentTime, actualTime: nil)
+                let uiImage = UIImage(cgImage: cgImage)
+                frames.append(uiImage)
+            } catch {
+                print("Error generating image: \(error)")
+            }
+            currentTime = currentTime + interval
+        }
+        block(frames)
+    }
+    
+    public func grabVisibleThumbnailFrames(_ block: @escaping (UIImage) -> Void) {
+        let startPosition = leftHandleView.frame.origin.x + assetPreview.contentOffset.x
+        let endPosition = rightHandleView.frame.origin.x + assetPreview.contentOffset.x - handleWidth
+        
+        self.assetPreview.visibleFrames(
             startPosition: startPosition,
             endPosition: endPosition,
             block: block
@@ -371,6 +404,17 @@ extension TrimmerView {
         }
         self.maxDuration = duration
         self.regenerateThumbnails()
+        self.seek(to: startTime)
+        if let position = getPosition(from: startTime) {
+            self.assetPreview.contentOffset.x = position
+        }
+        self.updateSelectedTime(stoppedMoving: true)
+    }
+    
+    public func play() {
+        guard let startTime = self.startTime else {
+            return
+        }
         self.seek(to: startTime)
         if let position = getPosition(from: startTime) {
             self.assetPreview.contentOffset.x = position
